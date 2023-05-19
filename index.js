@@ -9,7 +9,7 @@ app.use(express.json())
 app.use(cors())
 app.use("/users",userRouter)
 app.use("/contacts",contactRouter)
-const port = process.env.PORT;
+const port = process.env.PORT||4800;
 console.log(port)
 app.listen(port, async () => {
   try {
