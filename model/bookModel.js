@@ -4,7 +4,8 @@ const BookSchema = mongoose.Schema({
    auther:String,
    IBSN:String,
    image:String,
-   Year_of_publication:Number
+   Year_of_publication:Number,
+   Price:Number
 })
 
 const Book_model = mongoose.model("Books",BookSchema)
