@@ -1,3 +1,4 @@
+const { Relater } = require("../middleware/UsertoBookRelater");
 const { Book_model } = require("../model/bookModel");
 const express = require("express")
 const bookRouter=express.Router()
@@ -21,6 +22,26 @@ bookRouter.post("/",async (req, res) => {
       res.send(err.message)
     }
 })
+
+bookRouter.get("/AutherBook",Relater,async (req,res)=>{
+    const token =  req?.headers?.authorization?.split(' ')[0]
+    const { userId } = jwt.verify(token, "ved");
+ 
+
+   let query = { userid: userId };
+
+   if (req.query) {
+  query = { ...query, ...req.query };
+   }
+
+    try{
+        const data = await Book_model.find(query)
+        res.send(data)
+    }catch(err){
+      res.send(err.message)
+    }
+})
+
 
 bookRouter.delete("/:id",async(req,res)=>{
     const {id} = req.params
